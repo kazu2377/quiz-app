@@ -1,4 +1,5 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 const isPublicRoute = createRouteMatcher([
   "/",
@@ -7,9 +8,18 @@ const isPublicRoute = createRouteMatcher([
   "/api/(.*)"
 ]);
 
-export default clerkMiddleware((auth, req) => {
-  // For now, allow all routes - we'll handle auth in components
-  // This prevents redirect loops and allows the history page to load
+export default clerkMiddleware(async (auth, req) => {
+  const { pathname } = req.nextUrl;
+  const { userId } = await auth();
+
+  // Redirect root to /sign-in only for signed-out users
+  if (pathname === "/" && !userId) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/sign-in";
+    return NextResponse.redirect(url);
+  }
+
+  // Allow all other routes
 });
 
 export const config = {

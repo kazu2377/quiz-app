@@ -1,6 +1,6 @@
 import { SignIn } from "@clerk/nextjs";
 
-export default function LoginPage() {
+export default function SignInPage() {
   return (
     <main className="min-h-screen bg-white">
       <div className="grid min-h-screen grid-cols-1 md:grid-cols-2">
@@ -27,7 +27,7 @@ export default function LoginPage() {
         </section>
         <section className="flex items-center justify-center bg-white p-6 md:p-10">
           <div className="w-full max-w-md">
-            <SignIn routing="path" path="/login" afterSignInUrl="/" signUpUrl="/sign-up" />
+            <SignIn routing="path" path="/sign-in" afterSignInUrl="/" signUpUrl="/sign-up" />
             <footer className="mt-10 border-t border-gray-100 pt-6">
               <div className="flex flex-col items-center gap-2 text-xs text-gray-500 md:flex-row md:justify-center md:gap-4">
                 <a href="#" className="hover:underline">クッキーポリシー</a>
