@@ -120,6 +120,76 @@ class Database {
         correct_answer: 2,
         category: '科学',
         difficulty: 'easy'
+      },
+      {
+        question: '日本の通貨単位は？',
+        options: JSON.stringify(['円', 'ドル', 'ウォン', '元']),
+        correct_answer: 0,
+        category: '一般',
+        difficulty: 'easy'
+      },
+      {
+        question: '1年は何日ですか？（うるう年を除く）',
+        options: JSON.stringify(['364日', '365日', '366日', '360日']),
+        correct_answer: 1,
+        category: '一般',
+        difficulty: 'easy'
+      },
+      {
+        question: '地球の衛星は何ですか？',
+        options: JSON.stringify(['太陽', '月', '金星', '火星']),
+        correct_answer: 1,
+        category: '科学',
+        difficulty: 'easy'
+      },
+      {
+        question: '日本で最も長い川は？',
+        options: JSON.stringify(['利根川', '信濃川', '石狩川', '淀川']),
+        correct_answer: 1,
+        category: '地理',
+        difficulty: 'medium'
+      },
+      {
+        question: 'HTMLは何の略称ですか？',
+        options: JSON.stringify(['Hyper Text Markup Language', 'High Tech Modern Language', 'Home Tool Markup Language', 'Hyperlink and Text Markup Language']),
+        correct_answer: 0,
+        category: '技術',
+        difficulty: 'medium'
+      },
+      {
+        question: '世界で最も人口の多い国は？',
+        options: JSON.stringify(['インド', '中国', 'アメリカ', 'インドネシア']),
+        correct_answer: 0,
+        category: '地理',
+        difficulty: 'medium'
+      },
+      {
+        question: '円周率は約いくつですか？',
+        options: JSON.stringify(['3.14', '2.71', '1.41', '1.73']),
+        correct_answer: 0,
+        category: '数学',
+        difficulty: 'easy'
+      },
+      {
+        question: '日本の国旗は何と呼ばれますか？',
+        options: JSON.stringify(['日章旗', '日の丸旗', '旭日旗', '桜旗']),
+        correct_answer: 0,
+        category: '一般',
+        difficulty: 'medium'
+      },
+      {
+        question: '五輪の色はいくつありますか？',
+        options: JSON.stringify(['5色', '6色', '7色', '4色']),
+        correct_answer: 0,
+        category: '一般',
+        difficulty: 'easy'
+      },
+      {
+        question: '日本で最も面積の大きい都道府県は？',
+        options: JSON.stringify(['北海道', '岩手県', '長野県', '新潟県']),
+        correct_answer: 0,
+        category: '地理',
+        difficulty: 'medium'
       }
     ];
 
@@ -217,6 +287,38 @@ class Database {
           resolve(rows as QuizResult[]);
         }
       });
+    });
+  }
+
+  async createQuestion(question: string, options: string, correctAnswer: number, category: string, difficulty: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.db.run(
+        'INSERT INTO questions (question, options, correct_answer, category, difficulty) VALUES (?, ?, ?, ?, ?)',
+        [question, options, correctAnswer, category, difficulty],
+        function(err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        }
+      );
+    });
+  }
+
+  async deleteQuestion(id: number): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.db.run(
+        'DELETE FROM questions WHERE id = ?',
+        [id],
+        function(err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        }
+      );
     });
   }
 

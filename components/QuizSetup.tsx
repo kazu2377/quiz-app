@@ -78,6 +78,18 @@ export default function QuizSetup({ onStartQuiz }: QuizSetupProps) {
 
         <div className="flex gap-2 mb-6">
           <Link
+            href="/questions"
+            className="flex-1 bg-purple-100 hover:bg-purple-200 text-purple-800 py-2 px-4 rounded-lg text-center transition duration-200"
+          >
+            問題一覧
+          </Link>
+          <Link
+            href="/create-question"
+            className="flex-1 bg-green-100 hover:bg-green-200 text-green-800 py-2 px-4 rounded-lg text-center transition duration-200"
+          >
+            問題作成
+          </Link>
+          <Link
             href="/history"
             className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg text-center transition duration-200"
           >
