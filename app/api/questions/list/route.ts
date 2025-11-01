@@ -3,7 +3,7 @@ import { db } from '@/lib/database';
 
 export async function GET() {
   try {
-    const questions = await db.getQuestions(undefined, undefined, 50);
+    const questions = await db.getQuestions(undefined, undefined, 500);
     
     return NextResponse.json(questions);
   } catch (error) {
