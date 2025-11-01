@@ -8,6 +8,7 @@ export async function GET(request: NextRequest) {
     const difficulty = searchParams.get('difficulty') || undefined;
     const limit = parseInt(searchParams.get('limit') || '10');
 
+   
     const questions = await db.getQuestions(category, difficulty, limit);
     
     return NextResponse.json(questions);
