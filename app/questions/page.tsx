@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import Link from 'next/link';
 import QuestionsList from '@/components/QuestionsList';
 import type { Question } from '@/lib/database';
@@ -27,7 +28,7 @@ async function fetchQuestions(): Promise<Question[]> {
   }
 }
 
-export default async function QuestionsPage(): Promise<JSX.Element> {
+export default async function QuestionsPage(): Promise<ReactElement> {
   const questions = await fetchQuestions();
 
   return (

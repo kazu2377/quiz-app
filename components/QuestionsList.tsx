@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import type React from 'react';
 import type { Question } from '@/lib/database';
 
 interface QuestionsListProps {
@@ -9,7 +10,7 @@ interface QuestionsListProps {
 
 export default function QuestionsList({
   initialQuestions,
-}: QuestionsListProps): JSX.Element {
+}: QuestionsListProps): React.ReactElement {
   const [questions, setQuestions] = useState(initialQuestions);
   const [message, setMessage] = useState('');
 
