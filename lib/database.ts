@@ -21,6 +21,17 @@ export interface QuizResult {
   completed_at: string;
 }
 
+export interface QuizResultTest {
+  id: number;
+  user_id: string;
+  quiz_id: string;
+  score: number;
+  total_questions: number;
+  correct_answers: number;
+  duration_sec: number | null;
+  taken_at: string;
+}
+
 class Database {
   private db: sqlite3.Database;
 
@@ -285,6 +296,20 @@ class Database {
           reject(err);
         } else {
           resolve(rows as QuizResult[]);
+        }
+      });
+    });
+  }
+
+  async getQuizResultsTest(): Promise<QuizResultTest[]> {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM quiz_results_test ORDER BY taken_at DESC';
+      
+      this.db.all(query, (err, rows) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(rows as QuizResultTest[]);
         }
       });
     });
