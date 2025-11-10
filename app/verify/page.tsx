@@ -6,13 +6,14 @@ export const metadata: Metadata = {
 };
 
 async function getQuizResultsTest() {
+  console.log(process.env.NEXT_PUBLIC_BASE_URL);
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/verify`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      next: { revalidate: 60 }, // 60秒キャッシュ
+      next: { revalidate: 10 }, // 60秒キャッシュ
     });
 
     if (!response.ok) {
